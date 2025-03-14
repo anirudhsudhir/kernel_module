@@ -3,18 +3,20 @@ compile_commands() {
 }
 
 run() {
+  reset
+  sudo dmesg -C
   make clean
   make build
-  echo "\n\nBefore loading module\n"
-  sudo dmesg -k -H -L --time-format=reltime
-  echo "\n"
+  # echo -e "\n\nBefore loading module\n"
+  # sudo dmesg -k -H -L -P --time-format=reltime
+  echo -e "\n"
+  echo -e "Loading module...\n"
   sudo insmod mem_mod.ko pid-int="$2"
-  echo "After loading module\n"
-  sudo dmesg -k -H -L --time-format=reltime
+  # sudo dmesg -k -H -L -P --time-format=reltime
   sudo rmmod mem_mod
-  echo "\n"
-  echo "After unloading module\n"
-  sudo dmesg -k -H -L --time-format=reltime
+  # echo -e "\n"
+  echo -e "Unloading module...\n"
+  sudo dmesg -k -H -L -P --time-format=reltime
   make clean
 }
 
@@ -26,3 +28,4 @@ case "$1" in
   run "$@"
   ;;
 esac
+
