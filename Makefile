@@ -14,4 +14,3 @@ clean:
 	rm *.symvers
 	rm *.ko
 	rm *.mod
-
