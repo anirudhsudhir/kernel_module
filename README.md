@@ -11,9 +11,17 @@ chmod +x run.sh
 
 This script builds the kernel module, loads it, displays logs from kernel ring buffer via `dmesg`, unloads it and cleans the directory of all build artifacts.
 
+To use the provided sample program that forks and allocates memory on the heap,
+run the following in another terminal session:
+
+```sh
+cd fork_alloc/
+make
+```
+
 ### Note: LSP Support
 
-```
+```sh
 chmod +x run.sh
 ./run.sh compile_commands
 ```
@@ -25,5 +33,7 @@ This script generates a `compile_commands.json` for LSP support(tested only with
 - Kernel Module Programming Guide: [https://sysprog21.github.io/lkmpg/](https://sysprog21.github.io/lkmpg/)
 
 - Accessing a process' memory map: [https://linux-kernel-labs.github.io/refs/heads/master/labs/memory_mapping.html#structures-used-for-memory-mapping](https://linux-kernel-labs.github.io/refs/heads/master/labs/memory_mapping.html#structures-used-for-memory-mapping)
-- [https://stackoverflow.com/questions/39871740/read-running-processes-virtual-memory-from-mm-struct-in-linux](https://stackoverflow.com/questions/39871740/read-running-processes-virtual-memory-from-mm-struct-in-linux)
+- [https://stackoverflow.com/questions/5550404/list-entry-in-linux](https://stackoverflow.com/questions/5550404/list-entry-in-linux)
+
+- [https://stackoverflow.com/questions/16230524/explain-list-for-each-entry-and-list-for-each-entry-safe](https://stackoverflow.com/questions/16230524/explain-list-for-each-entry-and-list-for-each-entry-safe)
 

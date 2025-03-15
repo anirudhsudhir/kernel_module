@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include <wait.h>
 
+#define MULTIPLIER_MODULUS 1000
+
 void alloc_sleep();
 
 int main() {
@@ -27,9 +29,15 @@ int main() {
 
 void alloc_sleep() {
   printf("\nForked parent to create child with PID = %d\n", getpid());
-  int mem_alloc_size = sizeof(int) * 1000;
-  int *a = (int *)malloc(mem_alloc_size);
-  printf("Allocated memory = %d\n", mem_alloc_size);
-  sigset_t *ss;
-  sigsuspend(ss);
+  size_t multiplier = getpid() % MULTIPLIER_MODULUS;
+  size_t mem_alloc_size = sizeof(long) * 1000 * multiplier;
+  long *a = (long *)malloc(mem_alloc_size);
+  printf("Allocated memory = %ld KB\n", mem_alloc_size / 1024);
+
+  sigset_t s_mask;
+  sigemptyset(&s_mask);
+  sigsuspend(&s_mask);
+
+  free(a);
+  printf("Exiting from child with PID = %d\n", getpid());
 }
